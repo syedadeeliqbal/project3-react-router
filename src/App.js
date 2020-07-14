@@ -22,14 +22,26 @@ export default function App() {
           <Route path="/" element={<LaunchIndex />} />
           <Route path=":slug" element={<LaunchShoe />} />
         </Route>
+        <Route path="*" element={<PageNotFound/>} />
       </Routes>
     </Router>
+  );
+}
+
+function PageNotFound(){
+  return (
+    <div>
+      <h1>page not found</h1>
+    </div>
   );
 }
 
 function LaunchShoe() {
  const {slug} = useParams();
  const shoe = shoes[slug];
+
+  if(!shoe)
+  return (<div>Shoe not found</div>);
 
   return (<div>
     <h1>{shoe.name}</h1>
@@ -64,7 +76,7 @@ function Home() {
 function Launch() {
   return (
     <div>
-      <h1>Hello Launch</h1>
+      <h1>Main page</h1>
       <Outlet />
     </div>
   );
